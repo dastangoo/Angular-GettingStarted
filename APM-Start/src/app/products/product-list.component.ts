@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'pm-products',
-    templateUrl: 'app/products/product-list.component.html' 
+    templateUrl: './product-list.component.html' 
 })
-export class PorductListComponent {
+export class ProductListComponent {
     pageTitle: string = 'Product List';
-}
+} 
