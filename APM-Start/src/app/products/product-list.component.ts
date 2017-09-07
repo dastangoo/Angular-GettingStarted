@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
 
 @Component({
@@ -8,7 +8,7 @@ import { IProduct } from './product';
     styleUrls: ['./product-list.component.css']
     
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
     pageTitle: string = 'Product List';
     imageWidth: number = 50;
     imageMarging: number = 2;
@@ -67,7 +67,13 @@ export class ProductListComponent {
             "imageUrl": "http://openclipart.org/image/300px/svg_to_png/120337/xbox-controller_01.png"
         }    
     ];
+
     toggleImage(): void {
         this.showImage = !this.showImage;
     }
+
+    ngOnInit(): void {
+        console.log('In OnInit');
+    }
+
 } 
