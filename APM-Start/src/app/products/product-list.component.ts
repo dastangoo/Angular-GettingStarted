@@ -3,7 +3,10 @@ import { IProduct } from './product';
 
 @Component({
     selector: 'pm-products',
-    templateUrl: './product-list.component.html' 
+    templateUrl: './product-list.component.html',
+    // styles: ['thead {color: #337AB7;']
+    styleUrls: ['./product-list.component.css']
+    
 })
 export class ProductListComponent {
     pageTitle: string = 'Product List';
