@@ -3,9 +3,10 @@ import { IProduct } from './product';
 
 @Component({
     selector: 'pm-products',
-    templateUrl: './product-list.component.html',
+    moduleId: module.id,
+    templateUrl: 'product-list.component.html',
     // styles: ['thead {color: #337AB7;']
-    styleUrls: ['./product-list.component.css']
+    styleUrls: ['product-list.component.css']
     
 })
 export class ProductListComponent implements OnInit {
