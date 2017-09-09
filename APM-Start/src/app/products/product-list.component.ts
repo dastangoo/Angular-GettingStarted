@@ -1,43 +1,55 @@
 import { Component, OnInit } from '@angular/core';
+
 import { IProduct } from './product';
 import { ProductService } from './product.service';
 
 @Component({
-    templateUrl: 'product-list.component.html',
-    // styles: ['thead {color: #337AB7;']
-    styleUrls: ['product-list.component.css']
-    
+    templateUrl: './product-list.component.html',
+    styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {    
+export class ProductListComponent implements OnInit {
     pageTitle: string = 'Product List';
     imageWidth: number = 50;
-    imageMarging: number = 2;
+    imageMargin: number = 2;
     showImage: boolean = false;
-    listFilter: string;
     errorMessage: string;
 
+    _listFilter: string;
+    get listFilter(): string {
+        return this._listFilter;
+    }
+    set listFilter(value: string) {
+        this._listFilter = value;
+        this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+    }
+
+    filteredProducts: IProduct[];
     products: IProduct[] = [];
 
-    // private _productService;
-    // constructor(productService: ProductService){
-    //     this._productService = productService;
-    // }    
-    constructor(private _productService: ProductService){    
-    }
-        
-    toggleImage(): void {
-        this.showImage = !this.showImage;
-    }
+    constructor(private _productService: ProductService) {
 
-    ngOnInit(): void {
-        this._productService.getProducts()
-                .subscribe(products => this.products = products,
-                           error => this.errorMessage = <any>error);
-                
     }
 
     onRatingClicked(message: string): void {
         this.pageTitle = 'Product List: ' + message;
     }
 
-} 
+    performFilter(filterBy: string): IProduct[] {
+        filterBy = filterBy.toLocaleLowerCase();
+        return this.products.filter((product: IProduct) =>
+              product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    }
+
+    toggleImage(): void {
+        this.showImage = !this.showImage;
+    }
+
+    ngOnInit(): void {
+        this._productService.getProducts()
+                .subscribe(products => {
+                    this.products = products;
+                    this.filteredProducts = this.products;
+                },
+                    error => this.errorMessage = <any>error);
+    }
+}
