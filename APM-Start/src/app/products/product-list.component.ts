@@ -3,9 +3,8 @@ import { IProduct } from './product';
 import { ProductService } from './product.service';
 
 @Component({
-    selector: 'pm-products',
     moduleId: module.id,
-    templateUrl: 'product-list.component.html',
+    templateUrl: 'products/product-list.component.html',
     // styles: ['thead {color: #337AB7;']
     styleUrls: ['product-list.component.css']
     
